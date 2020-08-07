@@ -2,7 +2,7 @@ const express = require("express");
 
 const app = express();
 
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header(
     "Access-Control-Allow-Headers",
@@ -10,6 +10,8 @@ app.use(function(req, res, next) {
   );
   next();
 });
+
+const PORT = process.env.PORT || 3000;
 
 app.get("/", (req, res) => {
   res.send("Please Work, Fingers crossed!");
@@ -23,6 +25,6 @@ app.get("/test", (req, res) => {
   }
 });
 
-app.listen(3000, () => {
+app.listen(PORT, () => {
   console.log("server started");
 });
