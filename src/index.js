@@ -14,7 +14,7 @@ app.use(function (req, res, next) {
 const PORT = process.env.PORT || 3000;
 
 app.get("/", (req, res) => {
-  res.send("Oh Yeah Brother you got it");
+  res.send("Make Love not War!");
 });
 
 app.get("/test", (req, res) => {
