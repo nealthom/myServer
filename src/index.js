@@ -1,5 +1,7 @@
 const express = require("express");
 
+const userRouter = require("./routes/user");
+
 const app = express();
 
 app.use(function (req, res, next) {
@@ -11,18 +13,13 @@ app.use(function (req, res, next) {
   next();
 });
 
+app.use(express.json());
+app.use(userRouter);
+
 const PORT = process.env.PORT || 3000;
 
 app.get("/", (req, res) => {
   res.send("All I wanna do is a zoom zoom");
-});
-
-app.get("/test", (req, res) => {
-  try {
-    res.status(200).send({ msg: "You got it working my brother" });
-  } catch (error) {
-    res.status(400).send(error);
-  }
 });
 
 app.listen(PORT, () => {
