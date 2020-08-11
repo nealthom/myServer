@@ -12,10 +12,11 @@ router.get("/test", (req, res) => {
   }
 });
 router.post("/test", (req, res) => {
+  console.log(req);
   try {
     res.status(200).send(req);
   } catch (error) {
-    res.status(400).send(error);
+    res.status(400).send({ error: "What is up man" });
   }
 });
 
