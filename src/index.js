@@ -19,7 +19,7 @@ app.use(userRouter);
 const PORT = process.env.PORT || 3000;
 
 app.get("/", (req, res) => {
-  res.send("All I wanna do is a zoom zoom");
+  res.send("Hello friend let's do this!");
 });
 
 app.listen(PORT, () => {
