@@ -12,7 +12,7 @@ router.get("/test", (req, res) => {
   }
 });
 
-router.post("/register", async (req, res) => {
+router.post("/users/register", async (req, res) => {
   try {
     const user = new User(req.body);
     const token = await user.generateAuthToken();
@@ -63,7 +63,6 @@ router.get("/users/me", auth, async (req, res) => {
 
 router.patch("/users/me", auth, async (req, res) => {
   const _id = req.user.id;
-  const user = req.user;
   const updates = Object.keys(req.body);
   const allowedUpdates = ["name", "email", "password", "age"];
   const isValidOperation = updates.every((update) =>
