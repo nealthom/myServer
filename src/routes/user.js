@@ -11,6 +11,13 @@ router.get("/test", (req, res) => {
     res.status(400).send(error);
   }
 });
+router.post("/test", (req, res) => {
+  try {
+    res.status(200).send({ msg: "You got it going on my brother!" });
+  } catch (error) {
+    res.status(400).send(error);
+  }
+});
 
 router.post("/users/register", async (req, res) => {
   try {
