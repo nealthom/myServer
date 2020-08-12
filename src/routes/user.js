@@ -15,7 +15,8 @@ router.post("/test", (req, res) => {
   try {
     res.status(200).send(req);
   } catch (error) {
-    res.status(400).send(req);
+    console.log(req);
+    res.status(400).send({ error: "sorry bro" });
   }
 });
 
