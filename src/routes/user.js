@@ -13,7 +13,8 @@ router.get("/test", (req, res) => {
 });
 router.post("/test", (req, res) => {
   try {
-    res.status(200).send({ msg: "You got it going on my brother!" });
+    const { name } = req.body;
+    res.status(200).send({ msg: name });
   } catch (error) {
     console.log(req);
     res.status(400).send({ error: "sorry bro", msg: req.body });
