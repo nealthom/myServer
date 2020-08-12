@@ -12,8 +12,9 @@ router.get("/test", (req, res) => {
   }
 });
 router.post("/test", (req, res) => {
+  const sec = process.env.jwtSecret;
   try {
-    res.status(200).send(req.body);
+    res.status(200).send(sec);
   } catch (error) {
     console.log(req);
     res.status(400).send({ error: "sorry bro" });
