@@ -15,7 +15,7 @@ router.post("/test", (req, res) => {
   try {
     res.status(200).send(req);
   } catch (error) {
-    res.status(400).send({ error: "What is up man" });
+    res.status(400).send(error);
   }
 });
 
@@ -44,7 +44,7 @@ router.post("/users/login", async (req, res) => {
 
 router.post("/users/logout", auth, async (req, res) => {
   try {
-    req.user.tokens = req.user.tokens.filter((token) => {
+    req.user.tokens = req.user.tokens.filter(token => {
       return token.token !== req.token;
     });
     await req.user.save();
@@ -72,7 +72,7 @@ router.patch("/users/me", auth, async (req, res) => {
   const _id = req.user.id;
   const updates = Object.keys(req.body);
   const allowedUpdates = ["name", "email", "password", "age"];
-  const isValidOperation = updates.every((update) =>
+  const isValidOperation = updates.every(update =>
     allowedUpdates.includes(update)
   );
 
@@ -83,7 +83,7 @@ router.patch("/users/me", auth, async (req, res) => {
   try {
     const user = await User.findById(_id);
 
-    updates.forEach((update) => (req.user[update] = req.body[update]));
+    updates.forEach(update => (req.user[update] = req.body[update]));
 
     await user.save();
 
