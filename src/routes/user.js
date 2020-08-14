@@ -13,7 +13,7 @@ router.get("/test", (req, res) => {
 });
 router.post("/test", (req, res) => {
   try {
-    res.status(200).send(req.body);
+    res.status(200).send({ msg: "Thanks for the memories" });
   } catch (error) {
     console.log(req);
     res.status(400).send({ error: "sorry bro" });
@@ -23,6 +23,7 @@ router.post("/test", (req, res) => {
 router.post("/users/register", async (req, res) => {
   try {
     const user = new User(req.body);
+
     const token = await user.generateAuthToken();
 
     await user.save();
