@@ -20,9 +20,10 @@ router.post("/test", (req, res) => {
   }
 });
 
-router.get("/users", (req, res) => {
+router.get("/users", async (req, res) => {
   try {
-    res.status(200).send(req.user);
+    const user = await User.findById(req.user.id).select("-password");
+    res.json(user);
   } catch (error) {
     res.status(400).send(error);
   }
