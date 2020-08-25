@@ -20,6 +20,14 @@ router.post("/test", (req, res) => {
   }
 });
 
+router.get("/users", (req, res) => {
+  try {
+    res.status(200).send(req.user);
+  } catch (error) {
+    res.status(400).send(error);
+  }
+});
+
 router.post("/users/register", async (req, res) => {
   try {
     const user = new User(req.body);
