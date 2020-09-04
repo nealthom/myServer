@@ -20,6 +20,17 @@ router.post("/test", (req, res) => {
   }
 });
 
+router.get("/users", auth, async (req, res) => {
+  try {
+    console.log(req);
+    const user = await User.findById(req.user.id).select("-password");
+    res.json(user);
+  } catch (error) {
+    console.log(error);
+    res.status(400).send(error);
+  }
+});
+
 router.post("/users/register", async (req, res) => {
   try {
     const user = new User(req.body);
