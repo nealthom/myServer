@@ -9,7 +9,7 @@ const auth = async (req, res, next) => {
 
     const user = await User.findOne({
       _id: decoded._id,
-      "tokens.token": token
+      "tokens.token": token,
     });
     if (!user) {
       throw new Error();
@@ -18,7 +18,9 @@ const auth = async (req, res, next) => {
     req.user = user;
     next();
   } catch (error) {
-    res.status(401).send({ error: `Please authenticate! ${req}` });
+    res
+      .status(401)
+      .send({ error: `Please authenticate! ${JSON.stringify(req)}` });
   }
 };
 
