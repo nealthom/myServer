@@ -1,26 +1,43 @@
 const jwt = require("jsonwebtoken");
 const User = require("../models/user");
 
-const auth = async (req, res, next) => {
+// const auth = async (req, res, next) => {
+//   try {
+//     const token = req.header("Authorization").replace("Bearer ", "");
+//     const decoded = jwt.verify(token, process.env.jwtSecret);
+
+//     const user = await User.findOne({
+//       _id: decoded._id,
+//       "tokens.token": token
+//     });
+//     if (!user) {
+//       throw new Error();
+//     }
+//     req.token = token;
+//     req.user = user;
+//     next();
+//   } catch (error) {
+//     res.status(401).send({
+//       error: `Please authenticate!`
+//     });
+//   }
+// };
+
+// module.exports = auth;
+
+module.exports = function (req, res, next) {
+  const token = req.header("x-auth-token");
+
+  if (!token) {
+    return res.status(401).json({ msg: "No token, authorization denied" });
+  }
+
   try {
-    const token = req.header("Authorization").replace("Bearer ", "");
     const decoded = jwt.verify(token, process.env.jwtSecret);
-    console.log(token);
-    const user = await User.findOne({
-      _id: decoded._id,
-      "tokens.token": token
-    });
-    if (!user) {
-      throw new Error();
-    }
-    req.token = token;
-    req.user = user;
+
+    req.user = decoded.user;
     next();
-  } catch (error) {
-    res.status(401).send({
-      error: `Please authenticate! `
-    });
+  } catch (err) {
+    res.status(401).json({ msg: "Token is not valid" });
   }
 };
-
-module.exports = auth;
