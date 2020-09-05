@@ -34,11 +34,11 @@ module.exports = async function (req, res, next) {
 
   try {
     const decoded = jwt.verify(token, process.env.jwtSecret);
-    const user = await User.findOne({
-      _id: decoded.data._id,
-      "tokens.token": token
-    });
-    req.user = user;
+    // const user = await User.findOne({
+    //   _id: decoded.data._id,
+    //   "tokens.token": token
+    // });
+    req.user = decoded;
 
     next();
   } catch (err) {
