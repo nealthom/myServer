@@ -38,7 +38,7 @@ module.exports = async function (req, res, next) {
     //   _id: decoded.data._id,
     //   "tokens.token": token
     // });
-    req.user = decoded;
+    req.user = decoded._id;
 
     next();
   } catch (err) {
