@@ -10,7 +10,7 @@ const User = require("../models/User");
 // @desc    Create a post
 // @access  Private
 router.post(
-  "/",
+  "/posts",
   [auth, [check("text", "Text is required").not().isEmpty()]],
   async (req, res) => {
     const errors = validationResult(req);
