@@ -3,6 +3,7 @@ const express = require("express");
 require("./db/mongoose");
 
 const userRouter = require("./routes/user");
+const postRouter = require("./routes/posts");
 
 const app = express();
 
@@ -17,6 +18,7 @@ app.use(function (req, res, next) {
 
 app.use(express.json());
 app.use(userRouter);
+app.use(postRouter);
 
 const PORT = process.env.PORT || 3000;
 
