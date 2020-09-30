@@ -54,7 +54,7 @@ router.get("/posts", auth, async (req, res) => {
 // @route   GET posts/:id
 // @desc    Get post by id
 // @access  Private
-router.get("/:id", auth, async (req, res) => {
+router.get("/posts/:id", auth, async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
 
