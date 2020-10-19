@@ -38,9 +38,9 @@ router.post(
 );
 
 // @route   GET posts
-// @desc    Create a post
+// @desc    Get all post
 // @access  Private
-router.get("/posts", auth, async (req, res) => {
+router.get("/posts", async (req, res) => {
   try {
     const posts = await Post.find().sort({ date: -1 });
 
